@@ -33,8 +33,9 @@
             var var5 = component.get("v.Var5");        
 
             var dreamTotals = component.get("v.dreams");
-        
             var len = dreamTotals.length;
+
+            // query result is used for creating the chart 
             var queryResult = [];
             queryResult.push(
                 {query: var1},
@@ -59,7 +60,6 @@
                     }
                 } 
             }
-            debugger;
             var datasets = [];
             var countries = {};
             for (var k=0; k<5; +k) {
@@ -108,7 +108,6 @@
 
         });           
         $A.enqueueAction(action); 
-        
     },
     
     trendChange : function(component, event, helper) {
@@ -151,5 +150,3 @@
         
     }    
 })
-
-
