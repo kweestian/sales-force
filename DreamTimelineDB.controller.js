@@ -44,31 +44,43 @@
         // var listE = [], listE1 = [],listE2 = [],listE3 = [],listE4 = [],listE5 = [],listE6 = [],listE7 = [],listE8 = [],listE9 = [],listE10 = [],listE11 = [],listE12 = [];
     
         var len = dreamTotals.length;
-        var resultDreams = {};
+        var queryResult = [];
+        queryResult.push(
+            {query: var1},
+            {query: var2},
+            {query: var3},
+            {query: var4},
+            {query: var5}
+        )
         console.log("Vars***************************" + dreamTotals[0].Created_Date__c);
-        for (var i=0; i<len; ++i) {
-            var dream = dreamTotals[i];
-            var monthIndex = parseInt(dream.Created_Date__c.split('-')[1]) - 1;
+        // start loop for queries
+        for (var j=0; j<queryResult.length; j++) {
+            // for loop for dreams
+            for (var i=0; i<len; i++) {
+                var dream = dreamTotals[i];
+                var monthIndex = parseInt(dream.Created_Date__c.split('-')[1]) - 1;
+                
+                queryResult[j].countArray = new Array(len).fill(0);
 
-            dream.countArray = new Array(len).fill(0);
-            debugger;
-
-            if(dream.Haven__c.includes(var1)){
-              dream.countArray[monthIndex]++
-            }
-            if(dream.Haven__c.includes(var2)){
-                dream.countArray[monthIndex]++
-            }
-            if(dream.Haven__c.includes(var3)){
-                dream.countArray[monthIndex]++
-            }
-            if(dream.Haven__c.includes(var4)){
-                dream.countArray[monthIndex]++
-            }
-            if(dream.Haven__c.includes(var5)){
-              dream.countArray[monthIndex]++
+                if(dream.Haven__c.includes(queryResult[j].query)){
+                    // update count if query word is in dream sequence
+                  queryResult[j].countArray[monthIndex]++
+                }
+                // if(dream.Haven__c.includes(var2)){
+                //     dream.countArray[monthIndex]++
+                // }
+                // if(dream.Haven__c.includes(var3)){
+                //     dream.countArray[monthIndex]++
+                // }
+                // if(dream.Haven__c.includes(var4)){
+                //     dream.countArray[monthIndex]++
+                // }
+                // if(dream.Haven__c.includes(var5)){
+                //   dream.countArray[monthIndex]++
+                // }
             }
         }
+            
 
         // listA.push(listA1.length,listA2.length,listA3.length,listA4.length,listA5.length,listA6.length,listA7.length,listA8.length,listA9.length,listA10.length,listA11.length,listA12.length);
         // listB.push(listB1.length,listB2.length,listB3.length,listB4.length,listB5.length,listB6.length,listB7.length,listB8.length,listB9.length,listB10.length,listB11.length,listB12.length);
@@ -84,8 +96,8 @@
 
         var datasets = [];
         var countries = {};
-        var theDreams = new Array();
-        var dreamTags = [];
+        // var theDreams = new Array();
+        // var dreamTags = [];
 
         // not sure what dreamNumbers is doing
         // var dreamNumbers = [];
@@ -107,15 +119,15 @@
         console.log("MAP NUMBER ***** " + theDreams[4]);
             
         
-        var j;
-        for (j=0; j<5; +j) {
+        var k;
+        for (k=0; k<5; +k) {
             datasets.push({
-                label: dreamTags[j], 
-                data: dreamTotals[j].countArray,
+                label: queryResult[k].query, 
+                data: queryResult[k].countArray,
                 fill: false,
                 borderWidth: 1.5,
-                backgroundColor: colors[j],
-                borderColor: colors[j++],
+                backgroundColor: colors[k],
+                borderColor: colors[k++],
                 pointBackgroundColor: "#FFFFFF",
                 pointBorderWidth: 4,
                 pointHoverRadius: 8,
