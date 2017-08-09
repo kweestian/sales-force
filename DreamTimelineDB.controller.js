@@ -47,32 +47,29 @@
         var x;
         var len = dreamTotals.length;
         var resultDreams = {};
-        var resultDreams.countArray1 = new Array(len).fill(0);
-        var resultDreams.countArray2 = new Array(len).fill(0);
-        var resultDreams.countArray3 = new Array(len).fill(0);
-        var resultDreams.countArray4 = new Array(len).fill(0);
-        var resultDreams.countArray4 = new Array(len).fill(0);
-        var resultDreams.countArray5 = new Array(len).fill(0);
-        debugger;
         console.log("Vars***************************" + dreamTotals[0].Created_Date__c);
         for (i=0; i<len; ++i) {
             var dream = dreamTotals[i];
+            var resultDream = resultDreams[dream.Id] = {Name: dream.Name};
             x = dream.Created_Date__c.split('-');
             monthIndex = parseInt(x[1]);
+
+            resultDream.countArray = new Array(len).fill(0);
+
             if(dream.Haven__c.includes(var1)){
-              resultDreams[dream.name].countArray1[monthIndex]++
+              resultDream.countArray[monthIndex]++
             }
             if(dream.Haven__c.includes(var2)){
-                resultDreams[dream.name].countArray2[monthIndex]++
+                resultDream.countArray[monthIndex]++
             }
             if(dream.Haven__c.includes(var3)){
-                resultDreams[dream.name].countArray3[monthIndex]++
+                resultDream.countArray[monthIndex]++
             }
             if(dream.Haven__c.includes(var4)){
-                resultDreams[dream.name].countArray4[monthIndex]++
+                resultDream.countArray[monthIndex]++
             }
             if(dream.Haven__c.includes(var5)){
-              resultDreams[dream.name].countArray5[monthIndex]++
+              resultDream.countArray[monthIndex]++
             }
         }
 
@@ -106,12 +103,20 @@
         dreamTags.push(var3);        
         dreamTags.push(var4);        
         dreamTags.push(var5);
+            
+        debugger;
 
-        theDreams.push(resultDreams.countArray1);
-        theDreams.push(resultDreams.countArray5);
-        theDreams.push(resultDreams.countArray5);
-        theDreams.push(resultDreams.countArray5);
-        theDreams.push(resultDreams.countArray5);
+        for (var dream in resultDreams) {
+            theDreams.push(resultDreams[dream].countArray)
+        }
+
+
+
+        // theDreams.push(resultDreams.countArray1);
+        // theDreams.push(resultDreams.countArray5);
+        // theDreams.push(resultDreams.countArray5);
+        // theDreams.push(resultDreams.countArray5);
+        // theDreams.push(resultDreams.countArray5);
         console.log("MAP NUMBER ***** " + theDreams[4]);
             
         
@@ -169,7 +174,6 @@
         var action = component.get("c.getTrend"); 
         action.setCallback(this, function(response) {
             var theResult = response.getReturnValue();
-            debugger;
             var i = 0;
             var len = theResult.length;
             var newText;
