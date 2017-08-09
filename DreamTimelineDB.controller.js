@@ -37,39 +37,36 @@
         
         console.log(dreamTotals, 'dreamTotal');
         
-        var listA = [], listA1 = [],listA2 = [],listA3 = [],listA4 = [],listA5 = [],listA6 = [],listA7 = [],listA8 = [],listA9 = [],listA10 = [],listA11 = [],listA12 = [];
-        var listB = [], listB1 = [],listB2 = [],listB3 = [],listB4 = [],listB5 = [],listB6 = [],listB7 = [],listB8 = [],listB9 = [],listB10 = [],listB11 = [],listB12 = [];
-        var listC = [], listC1 = [],listC2 = [],listC3 = [],listC4 = [],listC5 = [],listC6 = [],listC7 = [],listC8 = [],listC9 = [],listC10 = [],listC11 = [],listC12 = [];
-        var listD = [], listD1 = [],listD2 = [],listD3 = [],listD4 = [],listD5 = [],listD6 = [],listD7 = [],listD8 = [],listD9 = [],listD10 = [],listD11 = [],listD12 = [];
-        var listE = [], listE1 = [],listE2 = [],listE3 = [],listE4 = [],listE5 = [],listE6 = [],listE7 = [],listE8 = [],listE9 = [],listE10 = [],listE11 = [],listE12 = [];
+        // var listA = [], listA1 = [],listA2 = [],listA3 = [],listA4 = [],listA5 = [],listA6 = [],listA7 = [],listA8 = [],listA9 = [],listA10 = [],listA11 = [],listA12 = [];
+        // var listB = [], listB1 = [],listB2 = [],listB3 = [],listB4 = [],listB5 = [],listB6 = [],listB7 = [],listB8 = [],listB9 = [],listB10 = [],listB11 = [],listB12 = [];
+        // var listC = [], listC1 = [],listC2 = [],listC3 = [],listC4 = [],listC5 = [],listC6 = [],listC7 = [],listC8 = [],listC9 = [],listC10 = [],listC11 = [],listC12 = [];
+        // var listD = [], listD1 = [],listD2 = [],listD3 = [],listD4 = [],listD5 = [],listD6 = [],listD7 = [],listD8 = [],listD9 = [],listD10 = [],listD11 = [],listD12 = [];
+        // var listE = [], listE1 = [],listE2 = [],listE3 = [],listE4 = [],listE5 = [],listE6 = [],listE7 = [],listE8 = [],listE9 = [],listE10 = [],listE11 = [],listE12 = [];
     
-        var i;
-        var x;
         var len = dreamTotals.length;
         var resultDreams = {};
         console.log("Vars***************************" + dreamTotals[0].Created_Date__c);
-        for (i=0; i<len; ++i) {
+        for (var i=0; i<len; ++i) {
             var dream = dreamTotals[i];
-            var resultDream = resultDreams[dream.Id] = {Name: dream.Name};
-            x = dream.Created_Date__c.split('-');
-            monthIndex = parseInt(x[1]);
+            var monthIndex = parseInt(dream.Created_Date__c.split('-')[1]) - 1;
 
-            resultDream.countArray = new Array(len).fill(0);
+            dream.countArray = new Array(len).fill(0);
+            debugger;
 
             if(dream.Haven__c.includes(var1)){
-              resultDream.countArray[monthIndex]++
+              dream.countArray[monthIndex]++
             }
             if(dream.Haven__c.includes(var2)){
-                resultDream.countArray[monthIndex]++
+                dream.countArray[monthIndex]++
             }
             if(dream.Haven__c.includes(var3)){
-                resultDream.countArray[monthIndex]++
+                dream.countArray[monthIndex]++
             }
             if(dream.Haven__c.includes(var4)){
-                resultDream.countArray[monthIndex]++
+                dream.countArray[monthIndex]++
             }
             if(dream.Haven__c.includes(var5)){
-              resultDream.countArray[monthIndex]++
+              dream.countArray[monthIndex]++
             }
         }
 
@@ -98,17 +95,7 @@
   //       dreamNumbers.push(resultDreams.countArray4.length);        
   //       dreamNumbers.push(resultDreams.countArray5.length);        
             
-        dreamTags.push(var1);        
-        dreamTags.push(var2);        
-        dreamTags.push(var3);        
-        dreamTags.push(var4);        
-        dreamTags.push(var5);
-            
-        debugger;
-
-        for (var dream in resultDreams) {
-            theDreams.push(resultDreams[dream].countArray)
-        }
+        
 
 
 
@@ -124,7 +111,7 @@
         for (j=0; j<5; +j) {
             datasets.push({
                 label: dreamTags[j], 
-                data: theDreams[j],
+                data: dreamTotals[j].countArray,
                 fill: false,
                 borderWidth: 1.5,
                 backgroundColor: colors[j],
