@@ -1,9 +1,9 @@
 ({
-	doInit : function(component, event, helper) {
+    doInit : function(component, event, helper) {
 
         console.log("RUNNING***");
         
-  		var action = component.get("c.getDreamInfo"); 
+        var action = component.get("c.getDreamInfo"); 
         action.setCallback(this, function(response) {
             var state = response.getState();
             if (state === "SUCCESS") {                
@@ -23,17 +23,17 @@
         
         var years = window.olympicDataService.getData();
 
-		var months = component.get("v.months");        
-		var labels = months;
+        var months = component.get("v.months");        
+        var labels = months;
 
-		var var1 = component.get("v.Var1");        
-		var var2 = component.get("v.Var2");        
-		var var3 = component.get("v.Var3");        
-		var var4 = component.get("v.Var4");        
-		var var5 = component.get("v.Var5");        
+        var var1 = component.get("v.Var1");        
+        var var2 = component.get("v.Var2");        
+        var var3 = component.get("v.Var3");        
+        var var4 = component.get("v.Var4");        
+        var var5 = component.get("v.Var5");        
 
 
-		var dreamTotals = component.get("v.dreams");
+        var dreamTotals = component.get("v.dreams");
         
         console.log(dreamTotals, 'dreamTotal');
         
@@ -42,7 +42,7 @@
         var listC = [], listC1 = [],listC2 = [],listC3 = [],listC4 = [],listC5 = [],listC6 = [],listC7 = [],listC8 = [],listC9 = [],listC10 = [],listC11 = [],listC12 = [];
         var listD = [], listD1 = [],listD2 = [],listD3 = [],listD4 = [],listD5 = [],listD6 = [],listD7 = [],listD8 = [],listD9 = [],listD10 = [],listD11 = [],listD12 = [];
         var listE = [], listE1 = [],listE2 = [],listE3 = [],listE4 = [],listE5 = [],listE6 = [],listE7 = [],listE8 = [],listE9 = [],listE10 = [],listE11 = [],listE12 = [];
-	
+
         var i;
         var x;
         var len = dreamTotals.length;
@@ -259,7 +259,7 @@
         var countries = {};
         var theDreams = new Array();
         var dreamTags = [];
-		var dreamNumbers = [];
+        var dreamNumbers = [];
         dreamNumbers.push(listA.length);        
         dreamNumbers.push(listB.length);        
         dreamNumbers.push(listC.length);        
@@ -267,10 +267,13 @@
         dreamNumbers.push(listE.length);        
             
         dreamTags.push(var1);        
-		dreamTags.push(var2);        
-		dreamTags.push(var3);        
-		dreamTags.push(var4);        
-		dreamTags.push(var5);
+        dreamTags.push(var2);        
+        dreamTags.push(var3);        
+        dreamTags.push(var4);        
+        dreamTags.push(var5);
+        
+        console.log(dreamTags, 'dream tags');
+        debugger;
 
         theDreams.push(listA);
         theDreams.push(listB);
@@ -314,12 +317,12 @@
                     if (elements.length === 1) {
                         var year = labels[elements[0]._index];
                         var country = datasets[elements[0]._datasetIndex].label;
-						var chartEvent = $A.get("e.c:ChartEvent");
+                        var chartEvent = $A.get("e.c:ChartEvent");
                         chartEvent.setParams({
                             data: {year: year, country: country}
                         });
                         console.log("elm about to fire");
-        				chartEvent.fire();
+                        chartEvent.fire();
                     }
                 }
             }
@@ -328,12 +331,12 @@
         });           
         $A.enqueueAction(action); 
         
-	},
+    },
     
-	trendChange : function(component, event, helper) {
-  		var action = component.get("c.getTrend"); 
+    trendChange : function(component, event, helper) {
+        var action = component.get("c.getTrend"); 
         action.setCallback(this, function(response) {
-		    var theResult = response.getReturnValue();
+            var theResult = response.getReturnValue();
             debugger;
             var i = 0;
             var len = theResult.length;
@@ -350,10 +353,10 @@
 
     publicChange : function(component, event, helper) {
         console.log("*****Public Change 1");
-  		var action = component.get("c.getPublic"); 
+        var action = component.get("c.getPublic"); 
         action.setCallback(this, function(response) {
             var state = response.getState();
-			console.log("The Public State is " + state);
+            console.log("The Public State is " + state);
             if (state === "SUCCESS") {                
                 var theResult = response.getReturnValue();
                 var i = 0;
